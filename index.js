@@ -34,7 +34,6 @@ api.buildUrl = function (path) {
 api.sendRequest = function (requestOptions) {
   requestOptions = requestOptions || {};
   this.addLocaleHeader(requestOptions);
-  console.log('headers', requestOptions);
   return rp(requestOptions)
     .then(function (response) {
       return JSON.parse(response);
@@ -50,7 +49,6 @@ api.sendRequest = function (requestOptions) {
  */
 api.sendSignedRequest = function (requestOptions) {
   return this.getToken().then(function (token) {
-    console.log('token here', token);
     requestOptions.headers = requestOptions.headers || {};
     requestOptions.headers['Authorization'] = 'Token ' + token;
     return this.sendRequest(requestOptions);
@@ -92,13 +90,10 @@ api.register = function (formData) {
     method: 'POST',
     form: formData
   }).then(function (response) {
-    console.log('register then');
     if (!response.auth_token) {
-      console.log('no token');
       return response;
     } else {
       return this.saveToken(response.auth_token).then(function () {
-        console.log('token saved');
         return response;
       });
     }
