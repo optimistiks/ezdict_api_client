@@ -1,0 +1,15 @@
+{
+  "name": "ezdict_api_module",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "optimistiks",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "request-promise": "^0.4.3"
+  }
+}
