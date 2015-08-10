@@ -2,7 +2,7 @@ var rp = require('request-promise');
 var Promise = require('bluebird');
 
 var api = {
-  URL: 'http://api.ezdict.potapovmax.com',
+  url: 'http://api.ezdict.potapovmax.com',
   locale: 'en',
   storage: {
     getItem: function (key) {
@@ -12,6 +12,10 @@ var api = {
     removeItem: function (key) {
     }
   }
+};
+
+api.setUrl = function (url) {
+  this.url = url;
 };
 
 api.setStorage = function (storage) {
@@ -28,17 +32,18 @@ api.addLocaleHeader = function (requestOptions) {
 };
 
 api.buildUrl = function (path) {
-  return this.URL + path + '/';
+  return this.url + path + '/';
 };
 
 api.sendRequest = function (requestOptions) {
   requestOptions = requestOptions || {};
+  requestOptions.json = true;
   this.addLocaleHeader(requestOptions);
   return rp(requestOptions)
     .then(function (response) {
-      return JSON.parse(response);
+      return response;
     }).catch(function (e) {
-      throw JSON.parse(e.error);
+      throw e.error;
     });
 };
 
@@ -81,14 +86,14 @@ api.removeToken = function () {
 
 /**
  * call the register api endpoint and save the token if it's present in the response
- * @param formData
+ * @param data
  * @returns {*}
  */
-api.register = function (formData) {
+api.register = function (data) {
   return this.sendRequest({
     uri: this.buildUrl('/user/register'),
     method: 'POST',
-    form: formData
+    body: data
   }).then(function (response) {
     if (!response.auth_token) {
       return response;
@@ -100,11 +105,11 @@ api.register = function (formData) {
   }.bind(this));
 };
 
-api.login = function (formData) {
+api.login = function (data) {
   return this.sendRequest({
     uri: this.buildUrl('/user/login'),
     method: 'POST',
-    form: formData
+    body: data
   }).then(function (response) {
     return api.saveToken(response.auth_token).then(function () {
       return response;
@@ -149,7 +154,23 @@ api.getTranslationHistory = function (page) {
   return this.sendSignedRequest({
     uri: this.buildUrl('/translation_history'),
     qs: {page: page},
-    type: 'GET'
+    method: 'GET'
+  });
+};
+
+api.getWordsLearning = function (page) {
+  return this.sendSignedRequest({
+    uri: this.buildUrl('/word/learning'),
+    qs: {page: page},
+    method: 'GET'
+  });
+};
+
+api.createWordLearning = function (word) {
+  return this.sendSignedRequest({
+    uri: this.buildUrl('/word/learning'),
+    body: {string: word},
+    method: 'POST'
   });
 };
 
