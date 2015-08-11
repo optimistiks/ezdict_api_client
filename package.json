@@ -10,7 +10,8 @@
     "build": "npm run browserify && npm run uglify"
   },
   "author": "optimistiks",
-  "license": "ISC",
+  "license": "UNLICENSED",
+  "private": true,
   "dependencies": {
     "bluebird": "^2.9.34",
     "request-promise": "^0.4.3"
