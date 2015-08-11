@@ -43,7 +43,7 @@ api.sendRequest = function (requestOptions) {
     .then(function (response) {
       return response;
     }).catch(function (e) {
-      throw e.error;
+      throw {statusCode: e.statusCode, error: e.error};
     });
 };
 
