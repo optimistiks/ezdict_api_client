@@ -2,7 +2,8 @@ var rp = require('request-promise');
 var Promise = require('bluebird');
 
 var api = {
-  url: 'http://api.ezdict.potapovmax.com',
+  protocol: 'http',
+  host: 'api.ezdict.potapovmax.com',
   locale: 'en',
   storage: {
     getItem: function (key) {
@@ -14,8 +15,12 @@ var api = {
   }
 };
 
-api.setUrl = function (url) {
-  this.url = url;
+api.setProtocol = function (protocol) {
+  this.protocol = protocol;
+};
+
+api.setHost = function (host) {
+  this.host = host;
 };
 
 api.setStorage = function (storage) {
@@ -32,12 +37,13 @@ api.addLocaleHeader = function (requestOptions) {
 };
 
 api.buildUrl = function (path) {
-  return this.url + path + '/';
+  return this.protocol + '://' + this.host + path + '/';
 };
 
 api.sendRequest = function (requestOptions) {
   requestOptions = requestOptions || {};
   requestOptions.json = true;
+  requestOptions.protocol = this.protocol + ':';
   this.addLocaleHeader(requestOptions);
   return rp(requestOptions)
     .then(function (response) {
