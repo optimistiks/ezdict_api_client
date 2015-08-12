@@ -71,7 +71,9 @@ api.sendSignedRequest = function (requestOptions) {
  * @returns {*}
  */
 api.getToken = function () {
-  return Promise.resolve(this.storage.getItem('auth_token'));
+  return Promise.resolve(this.storage.getItem('auth_token')).catch(function () {
+    throw {};
+  });
 };
 
 /**
@@ -79,7 +81,9 @@ api.getToken = function () {
  * @returns {*}
  */
 api.saveToken = function (token) {
-  return Promise.resolve(this.storage.setItem('auth_token', token));
+  return Promise.resolve(this.storage.setItem('auth_token', token)).catch(function () {
+    throw {};
+  });
 };
 
 /**
@@ -87,7 +91,9 @@ api.saveToken = function (token) {
  * @returns {*}
  */
 api.removeToken = function () {
-  return Promise.resolve(this.storage.removeItem('auth_token'));
+  return Promise.resolve(this.storage.removeItem('auth_token')).catch(function () {
+    throw {};
+  });
 };
 
 /**
