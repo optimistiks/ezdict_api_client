@@ -138,14 +138,15 @@ api.logout = function () {
 
 /**
  * call the translate endpoint
- * @param string
+ * @param text
+ * @param lang
  * @returns {*}
  */
-api.translate = function (string) {
+api.translate = function (text, lang) {
   return this.sendSignedRequest({
     uri: this.buildUrl('/translation'),
     method: 'GET',
-    qs: {string: string}
+    qs: {string: text, lang: lang}
   });
 };
 
