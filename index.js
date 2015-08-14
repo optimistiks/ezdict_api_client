@@ -156,6 +156,13 @@ api.translate = function (text, lang) {
   });
 };
 
+api.getLanguages = function () {
+  return this.sendSignedRequest({
+    uri: this.buildUrl('/language'),
+    method: 'GET'
+  });
+};
+
 api.getUserInfo = function () {
   return this.sendSignedRequest({
     uri: this.buildUrl('/user/me'),
