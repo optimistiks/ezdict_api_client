@@ -11,7 +11,7 @@ api.setProtocol = function (protocol) {
 };
 
 api.getProtocol = function () {
-  this.config.getProtocol();
+  return this.config.getProtocol();
 };
 
 api.setHost = function (host) {
@@ -19,7 +19,7 @@ api.setHost = function (host) {
 };
 
 api.getHost = function () {
-  this.config.getHost();
+  return this.config.getHost();
 };
 
 api.setStorage = function (storage) {
@@ -27,7 +27,7 @@ api.setStorage = function (storage) {
 };
 
 api.getStorage = function () {
-  this.config.getStorage();
+  return this.config.getStorage();
 };
 
 api.setLocale = function (locale) {
@@ -35,7 +35,7 @@ api.setLocale = function (locale) {
 };
 
 api.getLocale = function () {
-  this.config.getLocale();
+  return this.config.getLocale();
 };
 
 api.addLocaleHeader = function (requestOptions) {
