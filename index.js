@@ -10,31 +10,47 @@ api.setProtocol = function (protocol) {
   this.config.setProtocol(protocol);
 };
 
+api.getProtocol = function () {
+  this.config.getProtocol();
+};
+
 api.setHost = function (host) {
   this.config.setHost(host);
+};
+
+api.getHost = function () {
+  this.config.getHost();
 };
 
 api.setStorage = function (storage) {
   this.config.setStorage(storage);
 };
 
+api.getStorage = function () {
+  this.config.getStorage();
+};
+
 api.setLocale = function (locale) {
   this.config.setLocale(locale);
 };
 
+api.getLocale = function () {
+  this.config.getLocale();
+};
+
 api.addLocaleHeader = function (requestOptions) {
   requestOptions.headers = requestOptions.headers || {};
-  requestOptions.headers['Accept-Language'] = this.locale;
+  requestOptions.headers['Accept-Language'] = this.getLocale();
 };
 
 api.buildUrl = function (path) {
-  return this.protocol + '://' + this.host + path + '/';
+  return this.getProtocol() + '://' + this.getHost() + path + '/';
 };
 
 api.sendRequest = function (requestOptions) {
   requestOptions = requestOptions || {};
   requestOptions.json = true;
-  requestOptions.protocol = this.protocol + ':';
+  requestOptions.protocol = this.getProtocol() + ':';
   this.addLocaleHeader(requestOptions);
   return rp(requestOptions)
     .then(function (response) {
@@ -62,7 +78,7 @@ api.sendSignedRequest = function (requestOptions) {
  * @returns {*}
  */
 api.getToken = function () {
-  return Promise.resolve(this.storage.getItem('auth_token')).catch(function () {
+  return Promise.resolve(this.getStorage().getItem('auth_token')).catch(function () {
     throw {};
   });
 };
@@ -72,7 +88,7 @@ api.getToken = function () {
  * @returns {*}
  */
 api.saveToken = function (token) {
-  return Promise.resolve(this.storage.setItem('auth_token', token)).catch(function () {
+  return Promise.resolve(this.getStorage().setItem('auth_token', token)).catch(function () {
     throw {};
   });
 };
@@ -82,7 +98,7 @@ api.saveToken = function (token) {
  * @returns {*}
  */
 api.removeToken = function () {
-  return Promise.resolve(this.storage.removeItem('auth_token')).catch(function () {
+  return Promise.resolve(this.getStorage().removeItem('auth_token')).catch(function () {
     throw {};
   });
 };
