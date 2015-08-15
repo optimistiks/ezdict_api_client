@@ -1,34 +1,25 @@
 var rp = require('request-promise');
 var Promise = require('bluebird');
 
-var api = {
-  protocol: 'http',
-  host: 'api.ezdict.potapovmax.com',
-  locale: 'en',
-  storage: {
-    getItem: function (key) {
-    },
-    setItem: function (key, value) {
-    },
-    removeItem: function (key) {
-    }
-  }
-};
+var config = require('./modules/config');
+
+var api = {};
+api.config = config;
 
 api.setProtocol = function (protocol) {
-  this.protocol = protocol;
+  this.config.setProtocol(protocol);
 };
 
 api.setHost = function (host) {
-  this.host = host;
+  this.config.setHost(host);
 };
 
 api.setStorage = function (storage) {
-  this.storage = storage;
+  this.config.setStorage(storage);
 };
 
 api.setLocale = function (locale) {
-  this.locale = locale;
+  this.config.setLocale(locale);
 };
 
 api.addLocaleHeader = function (requestOptions) {
@@ -190,6 +181,31 @@ api.createWordLearning = function (word) {
   return this.sendSignedRequest({
     uri: this.buildUrl('/word/learning'),
     body: {string: word},
+    method: 'POST'
+  });
+};
+
+api.getProfile = function () {
+  return this.sendSignedRequest({
+    uri: this.buildUrl('/profile'),
+    method: 'GET'
+  });
+};
+
+api.updateProfile = function (params) {
+  params = params || {};
+  var allowedParams = ['target_lang'];
+  var body = {};
+
+  Object.keys(params).forEach(function (key) {
+    if (allowedParams.indexOf(key) !== -1) {
+      body[key] = params[key];
+    }
+  });
+
+  return this.sendSignedRequest({
+    uri: this.buildUrl('/profile'),
+    body: body,
     method: 'POST'
   });
 };
