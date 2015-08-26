@@ -185,22 +185,6 @@ api.getTranslationHistory = function (page) {
   });
 };
 
-api.getWordsLearning = function (page) {
-  return this.sendSignedRequest({
-    uri: this.buildUrl('/word/learning'),
-    qs: {page: page},
-    method: 'GET'
-  });
-};
-
-api.createWordLearning = function (word) {
-  return this.sendSignedRequest({
-    uri: this.buildUrl('/word/learning'),
-    body: {string: word},
-    method: 'POST'
-  });
-};
-
 api.getProfile = function () {
   return this.sendSignedRequest({
     uri: this.buildUrl('/profile'),
