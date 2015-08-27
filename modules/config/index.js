@@ -1,7 +1,9 @@
+var params = require('../../config');
+
 var config = {
-  protocol: 'http',
-  host: 'api.ezdict.potapovmax.com',
-  locale: 'en',
+  protocol: params.apiProtocol,
+  host: params.apiHost,
+  locale: params.apiLocale,
   storage: {
     getItem: function (key) {
     },
