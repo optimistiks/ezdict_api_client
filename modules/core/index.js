@@ -6,6 +6,10 @@ var core = {
   config: config
 };
 
+core.buildUrl = function (path) {
+  return this.config.getProtocol() + '://' + this.config.getHost() + path + '/';
+};
+
 core.setStorage = function (storage) {
   this.config.setStorage(storage);
 };
@@ -51,6 +55,7 @@ core.addLocaleHeader = function (requestOptions) {
 
 core.sendRequest = function (requestOptions) {
   requestOptions = requestOptions || {};
+  requestOptions.uri = this.buildUrl(requestOptions.uri);
   requestOptions.json = true;
   requestOptions.protocol = this.config.getProtocol() + ':';
   this.addLocaleHeader(requestOptions);

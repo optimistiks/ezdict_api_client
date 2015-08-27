@@ -1,7 +1,9 @@
 var core = require('./modules/core');
+var card = require('./modules/card');
 
 var api = {
-  core: core
+  core: core,
+  card: card
 };
 
 api.setProtocol = function (protocol) {
@@ -39,7 +41,7 @@ api.buildUrl = function (path) {
  */
 api.register = function (data) {
   return this.core.sendRequest({
-    uri: this.buildUrl('/user/register'),
+    uri: '/user/register',
     method: 'POST',
     body: data
   }).then(function (response) {
@@ -55,7 +57,7 @@ api.register = function (data) {
 
 api.login = function (data) {
   return this.core.sendRequest({
-    uri: this.buildUrl('/user/login'),
+    uri: '/user/login',
     method: 'POST',
     body: data
   }).then(function (response) {
@@ -71,7 +73,7 @@ api.login = function (data) {
  */
 api.logout = function () {
   return this.core.sendSignedRequest({
-    uri: this.buildUrl('/user/logout'),
+    uri: '/user/logout',
     method: 'POST'
   }).then(function () {
     return this.core.removeToken();
@@ -86,7 +88,7 @@ api.logout = function () {
  */
 api.translate = function (text, lang) {
   return this.core.sendSignedRequest({
-    uri: this.buildUrl('/translation'),
+    uri: '/translation',
     method: 'GET',
     qs: {string: text, lang: lang}
   });
@@ -94,21 +96,21 @@ api.translate = function (text, lang) {
 
 api.getLanguages = function () {
   return this.core.sendSignedRequest({
-    uri: this.buildUrl('/language'),
+    uri: '/language',
     method: 'GET'
   });
 };
 
 api.getUserInfo = function () {
   return this.core.sendSignedRequest({
-    uri: this.buildUrl('/user/me'),
+    uri: '/user/me',
     method: 'GET'
   });
 };
 
 api.getTranslationHistory = function (page) {
   return this.core.sendSignedRequest({
-    uri: this.buildUrl('/translation_history'),
+    uri: '/translation_history',
     qs: {page: page},
     method: 'GET'
   });
@@ -116,7 +118,7 @@ api.getTranslationHistory = function (page) {
 
 api.getProfile = function () {
   return this.core.sendSignedRequest({
-    uri: this.buildUrl('/profile'),
+    uri: '/profile',
     method: 'GET'
   });
 };
@@ -134,7 +136,7 @@ api.updateProfile = function (params) {
   });
 
   return this.core.sendSignedRequest({
-    uri: this.buildUrl('/profile'),
+    uri: '/profile',
     body: body,
     method: 'POST'
   });
