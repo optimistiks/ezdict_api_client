@@ -3,7 +3,7 @@ var core = require('../core');
 var card = {};
 
 card.buildUrl = function (id) {
-    return '/card/:id'.replace(':id', id);
+    return '/card/:id'.replace(':id', id ? id : '');
 };
 
 card.post = function (data) {
@@ -38,6 +38,7 @@ card.get = function (id, data) {
     //data only
     if (typeof id === 'object') {
         data = id;
+        id = null;
     }
     return core.sendSignedRequest({
         uri: this.buildUrl(id),
