@@ -3,7 +3,11 @@ var core = require('../core');
 var card = {};
 
 card.buildUrl = function (id) {
-    return '/card/:id'.replace(':id', id ? id : '');
+    var url = '/card';
+    if (id) {
+        url += '/' + id;
+    }
+    return url;
 };
 
 card.post = function (data) {
