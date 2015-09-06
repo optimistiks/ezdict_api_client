@@ -1,11 +1,13 @@
 var core = require('./modules/core');
 var card = require('./modules/card');
+var cardMeaning = require('./modules/card_meaning');
 var config = require('./modules/config');
 
 var api = {
     config: config,
     core: core,
-    card: card
+    card: card,
+    cardMeaning: cardMeaning
 };
 
 api.buildUrl = function (path) {
