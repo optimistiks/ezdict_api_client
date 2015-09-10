@@ -58,10 +58,9 @@ cardMeaning.delete = function (id) {
 };
 
 cardMeaning.deleteBatch = function (ids) {
-    var idsJoin = ids.join(',');
     return core.sendSignedRequest({
         uri: this.buildUrl(),
-        qs: {ids: idsJoin},
+        qs: {id: ids.join(',')},
         method: 'DELETE'
     });
 };
