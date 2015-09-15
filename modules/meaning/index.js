@@ -1,16 +1,16 @@
 var core = require('../core');
 
-var cardMeaning = {};
+var meaning = {};
 
-cardMeaning.buildUrl = function (id) {
-    var url = '/card_meaning';
+meaning.buildUrl = function (id) {
+    var url = '/meaning';
     if (id) {
         url += '/' + id;
     }
     return url;
 };
 
-cardMeaning.post = function (data) {
+meaning.post = function (data) {
     return core.sendSignedRequest({
         uri: this.buildUrl(),
         body: data,
@@ -18,7 +18,7 @@ cardMeaning.post = function (data) {
     });
 };
 
-cardMeaning.put = function (id, data) {
+meaning.put = function (id, data) {
     return core.sendSignedRequest({
         uri: this.buildUrl(id),
         body: data,
@@ -26,7 +26,7 @@ cardMeaning.put = function (id, data) {
     });
 };
 
-cardMeaning.putBatch = function (data) {
+meaning.putBatch = function (data) {
     return core.sendSignedRequest({
         uri: this.buildUrl(),
         body: data,
@@ -34,7 +34,7 @@ cardMeaning.putBatch = function (data) {
     });
 };
 
-cardMeaning.patch = function (id, data) {
+meaning.patch = function (id, data) {
     return core.sendSignedRequest({
         uri: this.buildUrl(id),
         body: data,
@@ -42,7 +42,7 @@ cardMeaning.patch = function (id, data) {
     });
 };
 
-cardMeaning.patchBatch = function (data) {
+meaning.patchBatch = function (data) {
     return core.sendSignedRequest({
         uri: this.buildUrl(),
         body: data,
@@ -50,14 +50,14 @@ cardMeaning.patchBatch = function (data) {
     });
 };
 
-cardMeaning.delete = function (id) {
+meaning.delete = function (id) {
     return core.sendSignedRequest({
         uri: this.buildUrl(id),
         method: 'DELETE'
     });
 };
 
-cardMeaning.deleteBatch = function (ids) {
+meaning.deleteBatch = function (ids) {
     return core.sendSignedRequest({
         uri: this.buildUrl(),
         qs: {id: ids.join(',')},
@@ -65,7 +65,7 @@ cardMeaning.deleteBatch = function (ids) {
     });
 };
 
-cardMeaning.get = function (id, data) {
+meaning.get = function (id, data) {
     // id + data or id only
     if ((id && data) || !data) {
         data = {};
@@ -82,4 +82,4 @@ cardMeaning.get = function (id, data) {
     });
 };
 
-module.exports = cardMeaning;
+module.exports = meaning;

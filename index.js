@@ -1,13 +1,15 @@
 var core = require('./modules/core');
 var card = require('./modules/card');
-var cardMeaning = require('./modules/card_meaning');
+var meaning = require('./modules/meaning');
+var toStudy = require('./modules/to-study');
 var config = require('./modules/config');
 
 var api = {
     config: config,
     core: core,
     card: card,
-    cardMeaning: cardMeaning
+    meaning: meaning,
+    toStudy: toStudy
 };
 
 api.buildUrl = function (path) {
