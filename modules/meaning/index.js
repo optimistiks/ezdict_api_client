@@ -3,7 +3,7 @@ var core = require('../core');
 var meaning = {};
 
 meaning.buildUrl = function (id) {
-    var url = '/meaning';
+    var url = '/card_meanings';
     if (id) {
         url += '/' + id;
     }

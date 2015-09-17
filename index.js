@@ -80,7 +80,7 @@ api.translate = function (text, lang) {
 
 api.getLanguages = function () {
     return this.core.sendSignedRequest({
-        uri: '/language',
+        uri: '/languages',
         method: 'GET'
     });
 };

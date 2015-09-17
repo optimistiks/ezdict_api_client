@@ -3,7 +3,7 @@ var core = require('../core');
 var toStudy = {};
 
 toStudy.buildUrl = function (id) {
-    var url = '/to_study';
+    var url = '/cards_to_study';
     if (id) {
         url += '/' + id;
     }

@@ -3,8 +3,7 @@ var core = require('../core');
 var suggestedMeaning = {};
 
 suggestedMeaning.buildUrl = function () {
-  var url = '/suggested_meaning';
-  return url;
+  return '/suggested_meanings';
 };
 
 suggestedMeaning.get = function (text, lang) {

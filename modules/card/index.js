@@ -3,7 +3,7 @@ var core = require('../core');
 var card = {};
 
 card.buildUrl = function (id) {
-    var url = '/card';
+    var url = '/cards';
     if (id) {
         url += '/' + id;
     }
@@ -12,7 +12,7 @@ card.buildUrl = function (id) {
 
 card.post = function (data) {
     return core.sendSignedRequest({
-        uri: '/card',
+        uri: '/cards',
         body: data,
         method: 'POST'
     });
