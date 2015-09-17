@@ -2,6 +2,7 @@ var core = require('./modules/core');
 var card = require('./modules/card');
 var meaning = require('./modules/meaning');
 var toStudy = require('./modules/to-study');
+var suggestedMeaning = require('./modules/suggested-meaning');
 var config = require('./modules/config');
 
 var api = {
@@ -9,7 +10,8 @@ var api = {
     core: core,
     card: card,
     meaning: meaning,
-    toStudy: toStudy
+    toStudy: toStudy,
+    suggestedMeaning: suggestedMeaning
 };
 
 api.buildUrl = function (path) {
