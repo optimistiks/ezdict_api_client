@@ -1,5 +1,7 @@
 var core = require('./modules/core');
 var card = require('./modules/card');
+var quizzes = require('./modules/quizzes');
+var quizAnswers = require('./modules/quiz-answers');
 var meaning = require('./modules/meaning');
 var toStudy = require('./modules/to-study');
 var suggestedMeaning = require('./modules/suggested-meaning');
@@ -11,6 +13,8 @@ var api = {
     card: card,
     meaning: meaning,
     toStudy: toStudy,
+    quizzes: quizzes,
+    quizAnswers: quizAnswers,
     suggestedMeaning: suggestedMeaning
 };
 
