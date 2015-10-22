@@ -14,7 +14,8 @@
   "private": true,
   "dependencies": {
     "bluebird": "^2.9.34",
-    "request-promise": "^0.4.3"
+    "superagent": "^1.4.0",
+    "superagent-promise": "^1.0.3"
   },
   "devDependencies": {
     "browserify": "^11.0.1",

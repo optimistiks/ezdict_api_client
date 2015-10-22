@@ -1,6 +1,6 @@
 var Promise = require('bluebird');
+var agent = require('superagent-promise')(require('superagent'), Promise);
 var config = require('../config');
-var rp = require('request-promise');
 
 var core = {};
 
@@ -44,16 +44,33 @@ core.addLocaleHeader = function (requestOptions) {
 };
 
 core.sendRequest = function (requestOptions) {
+
     requestOptions = requestOptions || {};
     requestOptions.uri = this.buildUrl(requestOptions.uri);
     requestOptions.json = true;
     requestOptions.protocol = config.getProtocol() + ':';
+
     this.addLocaleHeader(requestOptions);
-    return rp(requestOptions)
+
+    var request = agent(requestOptions.method, requestOptions.uri);
+
+    if (requestOptions.qs) {
+        request.query(requestOptions.qs);
+    }
+
+    if (requestOptions.body) {
+        request.send(requestOptions.body);
+    }
+
+    Object.keys(requestOptions.headers).forEach(function (header) {
+        request.set(header, requestOptions.headers[header]);
+    });
+
+    return request
         .then(function (response) {
             return response;
         }).catch(function (e) {
-            throw {statusCode: e.statusCode, error: e.error};
+            throw {statusCode: e.status, error: e.response.body};
         });
 };
 
