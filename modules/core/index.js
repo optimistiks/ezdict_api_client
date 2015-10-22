@@ -68,7 +68,7 @@ core.sendRequest = function (requestOptions) {
 
     return request
         .then(function (response) {
-            return response;
+            return response.body;
         }).catch(function (e) {
             throw {statusCode: e.status, error: e.response.body};
         });
